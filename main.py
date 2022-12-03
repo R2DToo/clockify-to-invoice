@@ -8,9 +8,12 @@ from calendar import monthrange
 import time
 import sys
 import requests
+import os
+from dotenv import load_dotenv
 
 def main():
     '''main'''
+    load_dotenv()
     user_id = get_user_id()
     # print(user_id)
     workspace_id = get_workspace_id()
@@ -65,6 +68,8 @@ def get_request(api_endpoint):
     API_KEY = ''
     if len(sys.argv) - 1 > 0:
         API_KEY = sys.argv[1]
+    else:
+        API_KEY = os.getenv('CLOCKIFY_API_KEY')
     headers = {'X-Api-Key': API_KEY}
     response = requests.get(f'https://api.clockify.me{api_endpoint}', headers=headers)
     return response.json()
