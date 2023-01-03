@@ -1,0 +1,26 @@
+{
+  "name": "clockify-to-invoice",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R2DToo/clockify-to-invoice.git"
+  },
+  "author": "Braden Still-Routley (R2DToo)",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/R2DToo/clockify-to-invoice/issues"
+  },
+  "homepage": "https://github.com/R2DToo/clockify-to-invoice#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "got": "^12.5.3",
+    "luxon": "^3.2.0",
+    "node-schedule": "^2.1.0"
+  }
+}

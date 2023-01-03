@@ -1,0 +1,4 @@
+node_moduules/
+*.py
+LICENSE
+package*.json
