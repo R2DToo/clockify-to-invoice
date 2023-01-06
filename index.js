@@ -1,6 +1,5 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import schedule from "node-schedule";
 import { DateTime, Duration } from "luxon";
 import got from "got";
 
@@ -53,31 +52,6 @@ console.log(
     DateTime.DATETIME_MED_WITH_SECONDS
   )}`
 );
-// Actual schedule: * * 1 1 * *
-// This is the first day of every month at 1AM
-// Test schedule: */10 * * * * *
-// This is every 10 seconds
-const job = schedule.scheduleJob("*/10 * * * * *", async (fireDate) => {
-  const fireDateTime = DateTime.fromJSDate(fireDate);
-  console.log(
-    `Running job at: ${fireDateTime.toLocaleString(
-      DateTime.DATETIME_MED_WITH_SECONDS
-    )}`
-  );
-  var lastMonth = fireDateTime.minus({ month: 1 });
-  var begLastMonth = lastMonth.startOf("month");
-  var endLastMonth = lastMonth.endOf("month");
-  console.log(
-    `Getting timecard for the period of ${begLastMonth.toLocaleString(
-      DateTime.DATETIME_MED_WITH_SECONDS
-    )} to ${endLastMonth.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS)}`
-  );
-  try {
-    await getTimecard(begLastMonth, endLastMonth);
-  } catch (error) {
-    console.error(`ERROR ENCOUNTERED!! Terminating timecard request`);
-  }
-});
 
 const getRequest = async (apiEndpoint) => {
   try {
@@ -93,3 +67,17 @@ const getRequest = async (apiEndpoint) => {
     // console.error(error);
   }
 };
+
+var lastMonth = DateTime.now().minus({ month: 1 });
+var begLastMonth = lastMonth.startOf("month");
+var endLastMonth = lastMonth.endOf("month");
+console.log(
+  `Getting timecard for the period of ${begLastMonth.toLocaleString(
+    DateTime.DATETIME_MED_WITH_SECONDS
+  )} to ${endLastMonth.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS)}`
+);
+try {
+  await getTimecard(begLastMonth, endLastMonth);
+} catch (error) {
+  console.error(`ERROR ENCOUNTERED!! Terminating timecard request`);
+}
