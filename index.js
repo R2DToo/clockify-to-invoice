@@ -34,11 +34,7 @@ const getTimecard = async (begOfMonth, endOfMonth) => {
       };
     }
   }
-  for (var project in parsedTimecard) {
-    console.log(
-      `project: ${project} - hours: ${parsedTimecard[project].hours}`
-    );
-  }
+  console.table(parsedTimecard);
 };
 
 const getIds = async () => {
